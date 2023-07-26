@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: first-ingress
+spec:
+  rules:
+    - host: first-nginx.info
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: first-nginx
+                port:
+                  number: 80

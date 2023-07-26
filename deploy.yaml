@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: first-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: first-nginx
+  template:
+    metadata:
+      labels:
+        app: first-nginx
+    spec:
+      containers:
+      - name: first-nginx
+        image: janhvimaddeshiya/first-nginx
+        ports:
+        - containerPort: 80
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: first-nginx
+spec:
+  type: NodePort
+  selector:
+    app: first-nginx
+  ports:
+  - port: 80
+    targetPort: 80
