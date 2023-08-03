@@ -32,7 +32,7 @@ pipeline {
     stage('Deploying to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "deployment.yaml")
+          kubernetesDeploy(configs: "deploy.yaml")
         }
       }
     }
