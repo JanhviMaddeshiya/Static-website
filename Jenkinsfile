@@ -27,7 +27,9 @@ pipeline {
           while (build != null) {
             if (build == "SUCCESS") {
               version += 1
+              break
             }
+            build = build.previousBuild
           }
         }
       }
