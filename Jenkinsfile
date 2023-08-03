@@ -36,7 +36,7 @@ pipeline {
     }
     stage("build") {
       steps {
-        sh " docker build -t stat-tag"
+        sh " docker build -t stat-tag Static-website/"
       }
     }
     stage("tag") {
@@ -46,7 +46,7 @@ pipeline {
     }
     stage("Push-repo") {
       steps {
-        sh "docker push janhvimaddeshiya/notejam-tag:${version}"
+        sh "docker push janhvimaddeshiya/stat-tag:${version}"
       }
     }
   }
