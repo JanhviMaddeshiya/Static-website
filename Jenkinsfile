@@ -21,13 +21,7 @@ pipeline {
     }
     stage("build") {
       steps {
-        sh " docker build -t stat-tag Static-website/"
-      }
-    }
-    stage("tag") {
-      steps {
-        sh "docker tag stat-tag janhvimaddeshiya/stat-tag"
-        echo done
+        sh " docker build -t janhvimaddeshiya/stat-tag Static-website/"
       }
     }
     stage("Push-repo") {
