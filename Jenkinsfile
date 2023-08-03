@@ -42,6 +42,7 @@ pipeline {
     stage("tag") {
       steps {
         sh "docker tag stat-tag janhvimaddeshiya/stat-tag:${version}"
+        echo done
       }
     }
     stage("Push-repo") {
