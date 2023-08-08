@@ -1,3 +1,22 @@
+def lastSuccessfulBuildID = 0
+def version = 0
+def buildNumber = currentBuild.number
+def build = currentBuild.previousBuild
+if (build == null) {
+   version = 1
+}
+while (build != null) {
+    if (build.result == "SUCCESS") {
+        lastSuccessfulBuildID = build.id as Integer
+        version = lastSuccessfulBuildID + 1
+        break
+    } else if(build.result == "FAILURE") {
+        lastSuccessfulBuildID = build.id as Integer
+        version = lastSuccessfulBuildID - buildNumber
+    }
+    build = build.previousBuild
+}
+
 pipeline {
   agent any
   environment {
@@ -21,19 +40,12 @@ pipeline {
     }
     stage("build") {
       steps {
-        sh " docker build -t janhvimaddeshiya/stat-tag Static-website/"
+        sh " docker build -t janhvimaddeshiya/stat-tag:${version} Static-website/"
       }
     }
     stage("Push-repo") {
       steps {
-        sh "docker push janhvimaddeshiya/stat-tag"
-      }
-    }
-    stage('Deploying to Kubernetes') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "deploy.yaml")
-        }
+        sh "docker push janhvimaddeshiya/stat-tag:${version}"
       }
     }
   }
