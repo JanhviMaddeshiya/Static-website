@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: first-nginx
+  name: first-nginx-jenkins
 spec:
   replicas: 1
   selector:
@@ -29,5 +29,5 @@ spec:
   selector:
     app: first-nginx
   ports:
-  - port: 80
+  - port: 8011
     targetPort: 80
