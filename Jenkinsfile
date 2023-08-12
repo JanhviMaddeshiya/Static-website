@@ -21,6 +21,7 @@ pipeline {
   agent any
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+    KUBECONFIG = credentials('kubeconfig')
   }
   stages {
     stage("Clean-up") {
@@ -50,7 +51,7 @@ pipeline {
     //}
      stage("apply kube") {
       steps {
-        sh "kubectl apply -f Static-website/deploy.yaml"
+        sh "kubectl --kubeconfig $KUBECONFIG apply -f Static-website/deploy.yaml"
       }
     }
   }
