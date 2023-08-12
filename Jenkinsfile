@@ -54,5 +54,10 @@ pipeline {
         sh "kubectl --kubeconfig $KUBECONFIG apply -f Static-website/deploy.yaml"
       }
     }
+   stage("get deploy") {
+      steps {
+        sh "kubectl --kubeconfig $KUBECONFIG get deploy"
+      }
+    }
   }
 }
